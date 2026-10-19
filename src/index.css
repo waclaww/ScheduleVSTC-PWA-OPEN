@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+html {
+  font-size: 17.5px;
+  /* iOS Safari увеличивает шрифт в длинных абзацах — отключаем */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Масштаб интерфейса из настроек: всё задано в rem */
+html[data-scale="sm"] {
+  font-size: 15.75px; /* 90% */
+}
+
+html[data-scale="lg"] {
+  font-size: 19.25px; /* 110% */
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+/* Очень лёгкий градиент фона с оттенком зелёного из логотипа */
+.app-bg {
+  background: linear-gradient(180deg, #e9f3ee 0%, #f5f9f7 45%, #ffffff 100%);
+}
+
+.dark .app-bg,
+[data-theme="dark"] .app-bg {
+  background: linear-gradient(180deg, #111a16 0%, #0f1311 45%, #0d0d0d 100%);
+}
+
+/* Шапка в цвете логотипа: светлый текст и иконки на тёмно-зелёном */
+.app-header {
+  background: #2f6f56;
+  color: #fff;
+}
+
+.dark .app-header,
+[data-theme="dark"] .app-header {
+  background: #1d4a3a;
+}
+
+.app-header button {
+  color: #fff;
+}
+
+/* Только data-hovered: :hover на телефонах залипает после нажатия */
+.app-header button[data-hovered],
+.app-header button[data-pressed] {
+  background: rgb(255 255 255 / 0.14);
+}
+
+/* Разделитель «·» перед элементом; у первого в строке его обрезает обёртка (см. App.jsx) */
+.dot-sep {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.dot-sep::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  width: 1rem;
+  text-align: center;
+}

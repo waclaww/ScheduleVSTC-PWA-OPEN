@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icons/pwalogo192.png" />
+    <link rel="apple-touch-icon" href="/icons/pwalogo180.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Расписание ВГТК" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#2f6f56" />
+    
+    <meta name="clckd" content="db710b9b8b21e0609db7f887dfb0c721" />
+    <title>Расписание ВГТК</title>
+    <meta name="description" content="Расписание занятий ВГТК (Витебский государственный технологический колледж) на сегодня и завтра: найдите свою группу, установите приложение на телефон." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Расписание ВГТК" />
+    <meta property="og:description" content="Расписание занятий ВГТК на сегодня и завтра — по группам." />
+    <meta property="og:locale" content="ru_RU" />
+    <script>
+      (function () {
+        var stored = localStorage.getItem('heroui-theme') || 'system';
+        var dark = stored === 'dark' || (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.add(dark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? '#1d4a3a' : '#2f6f56');
+        var lang = localStorage.getItem('app-lang') || 'system';
+        if (lang !== 'ru' && lang !== 'be' && lang !== 'en') {
+          var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          lang = 'ru';
+          for (var i = 0; i < list.length; i++) {
+            var code = String(list[i] || '').toLowerCase();
+            if (code.indexOf('be') === 0) { lang = 'be'; break; }
+            if (code.indexOf('ru') === 0) { lang = 'ru'; break; }
+            if (code.indexOf('en') === 0) { lang = 'en'; break; }
+          }
+        }
+        document.documentElement.lang = lang;
+        // Название и манифест на языке интерфейса — сразу, до загрузки приложения
+        var appName = { ru: 'Расписание ВГТК', be: 'Расклад ВДТК', en: 'Schedule VSTC' }[lang];
+        document.title = appName;
+        var appTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+        if (appTitle) appTitle.setAttribute('content', appName);
+        var manifest = document.createElement('link');
+        manifest.rel = 'manifest';
+        manifest.href = lang === 'ru' ? '/manifest.webmanifest' : '/manifest-' + lang + '.webmanifest';
+        document.head.appendChild(manifest);
+        var scale = localStorage.getItem('app-scale');
+        document.documentElement.dataset.scale = scale === 'sm' || scale === 'lg' ? scale : 'md';
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,393 @@
+:root,
+[data-theme="light"] {
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --text: #161616;
+  --muted: #6f6f6a;
+  --line: #e6e6e1;
+  --fill: #ecece8;
+  --lunch: #8a7340;
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --surface: #1c1c1c;
+  --text: #f3f3ef;
+  --muted: #8e8e87;
+  --line: #2c2c2c;
+  --fill: #262626;
+  --lunch: #c4b06a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(0.75rem + env(safe-area-inset-top)) 1.1rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.topbar h1,
+.topbar-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.icon-btn:hover {
+  background: var(--fill);
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 1rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom));
+}
+
+.hero {
+  max-width: 28rem;
+  margin: 12vh auto 0;
+}
+
+.hero h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.group-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.group-form input {
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.group-form input::placeholder {
+  text-transform: none;
+  color: var(--muted);
+}
+
+.primary-btn,
+.text-btn {
+  border: 0;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 10px;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.primary-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.text-btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.text-btn:hover {
+  color: var(--text);
+}
+
+.error {
+  margin-top: 0.8rem;
+  color: #b42318;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .error {
+  color: #f2b8b5;
+}
+
+.toolbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar .group {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.tabs button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.tabs button.active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 7.2rem 1fr auto;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.row .time {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.row .subject {
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.row .room {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.row.lunch .subject,
+.row.lunch .time,
+.row.lunch .room {
+  color: var(--lunch);
+  font-weight: 400;
+}
+
+.state {
+  color: var(--muted);
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.state .text-btn {
+  margin-top: 0.8rem;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1rem 0 0.25rem;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.dot.on {
+  background: var(--text);
+}
+
+.settings {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.block {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.block:last-child {
+  border-bottom: 0;
+}
+
+.block h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.setting-row span {
+  font-size: 0.98rem;
+}
+
+.hint {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.switch {
+  width: 44px;
+  height: 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--fill);
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease;
+}
+
+.switch.on {
+  background: var(--text);
+}
+
+.switch.on::after {
+  transform: translateX(18px);
+  background: var(--bg);
+}
+
+.switch:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: var(--fill);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segmented button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 0.55rem 0.4rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.segmented button.active {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    margin-top: 6vh;
+  }
+
+  .group-form {
+    flex-direction: column;
+  }
+
+  .row {
+    grid-template-columns: 1fr auto;
+    gap: 0.25rem 0.8rem;
+  }
+
+  .row .time {
+    grid-column: 1 / -1;
+    font-size: 0.78rem;
+  }
+}
