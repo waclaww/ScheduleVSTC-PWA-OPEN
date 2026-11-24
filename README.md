@@ -1,16 +1,28 @@
-# React + Vite
+# Расписание ВГТК (PWA)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PWA для просмотра расписания занятий ВГТК на сегодня и завтра: React 19, Vite, HeroUI, Tailwind CSS.
 
-Currently, two official plugins are available:
+```bash
+cp .env.example .env   # SCHEDULE_API_URL — адрес бэкенда, dev-сервер проксирует на него /api
+npm install
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Архитектура — Feature-Sliced Design
 
-## React Compiler
+```
+src/
+├── app/        # точка входа, провайдеры (тема, язык), глобальные стили, service worker
+├── pages/      # экраны: schedule, settings, install
+├── widgets/    # schedule-viewer — расписание со свайпом дней и pull-to-refresh
+├── features/   # действия пользователя: select-group, change-group, refresh-schedule,
+│               # install-app, change-theme, change-language, change-scale, contact-support
+├── entities/   # schedule (API, парсинг, стор, список занятий), group (нормализация, сохранение)
+└── shared/     # api-клиент, i18n, конфиг, утилиты (store, storage, platform...), UI-кит
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Правила:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- слой импортирует только слои ниже себя: `app → pages → widgets → features → entities → shared`;
+- слайсы одного слоя друг друга не импортируют;
+- снаружи слайса импортируется только его публичный API (`index.js`), через алиас `@/`.
